@@ -55,6 +55,7 @@ def store_ticker_data(data_path:str, ticker_symbol:str, ticker_data:pd.DataFrame
         df = pd.concat([df,ticker_data]).reset_index(drop=True).drop_duplicates(subset=['Datetime']).sort_values(by=['Datetime'])
     else:
         df = ticker_data
+    print(df)
     df.to_csv(ticker_file_path, index=False)
 
 
