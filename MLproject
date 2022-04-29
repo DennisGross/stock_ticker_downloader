@@ -1,0 +1,12 @@
+name: stock_ticker_downloader
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      data_path: {type: string, default: "data"}
+      symbols: {type: string, default: "MSFT,AAPL"}
+      period: {type: string, default: "7d"}
+      interval: {type: string, default: "1m"}
+    command: "python main.py --data_path={data_path} --symbols={symbols} --period={period} --interval={interval}"

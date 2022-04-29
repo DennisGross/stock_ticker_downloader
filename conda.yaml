@@ -1,0 +1,8 @@
+name: stock_ticker_downloader
+channels:
+  - defaults
+dependencies:
+  - pandas=1.4.2
+  - pip
+  - pip:
+    - yfinance
