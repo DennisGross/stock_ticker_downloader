@@ -55,7 +55,6 @@ def store_ticker_data(data_path:str, ticker_symbol:str, ticker_data:pd.DataFrame
         df = pd.concat([df,ticker_data]).reset_index(drop=True).drop_duplicates(subset=['Datetime']).sort_values(by=['Datetime'])
     else:
         df = ticker_data
-    print(df)
     df.to_csv(ticker_file_path, index=False)
 
 
@@ -67,4 +66,3 @@ if __name__=="__main__":
     for ticker_symbol in ticker_symbols:
         ticker_data = yf.download(tickers=ticker_symbol, period=command_line_arguments['period'],interval=command_line_arguments['interval'])
         store_ticker_data(data_path, ticker_symbol, ticker_data)
-    print("SUCCESS")
