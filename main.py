@@ -64,8 +64,5 @@ if __name__=="__main__":
     data_path = command_line_arguments['data_path']
     ticker_symbols = get_ticker_symbols(command_line_arguments['symbols'])
     for ticker_symbol in ticker_symbols:
-        try:
-            ticker_data = yf.download(tickers=ticker_symbol, period=command_line_arguments['period'],interval=command_line_arguments['interval'])
-            store_ticker_data(data_path, ticker_symbol, ticker_data)
-        except:
-            pass
+        ticker_data = yf.download(tickers=ticker_symbol, period=command_line_arguments['period'],interval=command_line_arguments['interval'])
+        store_ticker_data(data_path, ticker_symbol, ticker_data)
