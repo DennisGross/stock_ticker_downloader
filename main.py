@@ -4,6 +4,7 @@ import sys
 import os
 import yfinance as yf
 import pandas as pd
+import time
 from typing import Dict, Any, List
 
 def get_arguments() -> Dict[str, Any]:
@@ -57,6 +58,29 @@ def store_ticker_data(data_path:str, ticker_symbol:str, ticker_data:pd.DataFrame
         df = ticker_data
     df.to_csv(ticker_file_path, index=False)
 
+def append_stock_info(ticker_symbol:str, data_path:str):
+    """Stores/Add Stock info
+
+    Args:
+        ticker_symbol (str): Ticker Symbol
+        data_path (str): Root path to data folder
+    """
+    market_cap_file_path = os.path.join(data_path, str(ticker_symbol) + "_info.csv")
+    stock = yf.Ticker(ticker_symbol)
+    try:
+        market_cap = stock.info['marketCap']
+    except:
+        market_cap = -1
+    try:
+        currency = stock.info['financialCurrency']
+    except:
+        currency = "NAN"
+
+
+    time_stamp = time.time()
+    f = open(market_cap_file_path,'a')
+    f.write(str(time_stamp) + ',' + str(market_cap) + ',' + str(currency) + '\n')
+    f.close()
 
 
 if __name__=="__main__":
@@ -67,4 +91,5 @@ if __name__=="__main__":
     ticker_symbols = get_ticker_symbols(command_line_arguments['symbols'])
     for ticker_symbol in ticker_symbols:
         ticker_data = yf.download(tickers=ticker_symbol, period=command_line_arguments['period'],interval=command_line_arguments['interval'])
+        #append_stock_info(ticker_symbol, data_path)
         store_ticker_data(data_path, ticker_symbol, ticker_data)
