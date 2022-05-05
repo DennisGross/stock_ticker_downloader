@@ -10,3 +10,9 @@ entry_points:
       period: {type: string, default: "7d"}
       interval: {type: string, default: "1m"}
     command: "python main.py --data_path={data_path} --symbols={symbols} --period={period} --interval={interval}"
+  
+  info:
+    parameters:
+      data_path: {type: path, default: "data"}
+      symbols: {type: string, default: "MSFT,AAPL"}
+    command: "python info.py --data_path={data_path} --symbols={symbols}"

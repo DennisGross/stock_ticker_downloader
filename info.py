@@ -1,10 +1,8 @@
 """This module downloads ticker data from yahoo finance."""
 import yfinance as yf
+import pandas as pd
 from typing import Dict, Any, List
 from helper import *
-
-
-
 
 if __name__=="__main__":
     command_line_arguments = get_arguments()
@@ -15,5 +13,5 @@ if __name__=="__main__":
         command_line_arguments['symbols'] += ',ACLS,SUMCF,SESMF,BESIY,SCIA,RNWEF,RNWEY,AXTI,OLED,UCTT,KLIC,TGAN,CAMT,BRKS,ASMVF,TOELY,CCMP,AIXXF,AEHR,AMBA,AMAT,RBCN,ATOM,IQEPF,MMAPF,TOELF,MYBUF,COHU,ASML,ASMIY,SODI,IPGP,PLAB,MCRNF,NVMI,LRCX,ENTG,DSCSY,TER,VECO,STRI,NNOCF,SUOPY,TRT,SFDMY,ASMVY,DQ,DISPF,ICHR,SLOIY,GSTX,ASYS,ADTTF,KLAC,XPER,OXINF,SPVNF,ACMR,ATEYY,ASMLF,ASMXF'
     ticker_symbols = get_ticker_symbols(command_line_arguments['symbols'])
     for ticker_symbol in ticker_symbols:
-        ticker_data = yf.download(tickers=ticker_symbol, period=command_line_arguments['period'],interval=command_line_arguments['interval'])
-        store_ticker_data(data_path, ticker_symbol, ticker_data)
+        append_stock_info(ticker_symbol, data_path)
+        
